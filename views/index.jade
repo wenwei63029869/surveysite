@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  h2 Questions
+    each question in questions
+        p #{question.content}
+        each answer in question.Answers
+          input(
+            type='radio'
+            name=answer.content
+            value='#{answer.id}'
+            id="q1a"
+          )
+          |  #{answer.content}
