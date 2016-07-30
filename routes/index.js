@@ -15,8 +15,19 @@ router.get('/', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-  console.log(req.body)
-  res.send('respond with a resource');
+  models.User.findOne({ email: req.body.username }, function(err, user) {
+    if (!user) {
+      res.render('/', { error: 'Invalid email or password.' });
+    } else {
+      if (req.body.password === user.password) {
+        console.log("found user")
+        res.send("successfully login")
+        // res.redirect('/dashboard');
+      } else {
+        res.render('/', { error: 'Invalid email or password.' });
+      }
+    }
+  });
 });
 
 module.exports = router;

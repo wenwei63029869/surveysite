@@ -1,12 +1,12 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var userQuestion = sequelize.define('userQuestion', {
-    answerId: DataTypes.STRING
+  var userQuestions = sequelize.define('userQuestions', {
   }, {
     classMethods: {
       associate: function(models) {
+        userQuestions.belongsTo(models.Answer)
       }
     }
   });
-  return userQuestion;
+  return userQuestions;
 };

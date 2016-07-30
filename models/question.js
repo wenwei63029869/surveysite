@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Question.hasMany(models.Answer)
         Question.belongsToMany(models.User, {
-          through:models.userQuestion
+          through:models.userQuestions
         })
       }
     }
