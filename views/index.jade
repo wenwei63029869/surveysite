@@ -1,17 +1,26 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    form(method="post", class="signin-form", action="/login")
+      h2(class="form-signin-heading") Please sign in
+      label(for="inputEmail", class="sr-only") Username
+      input.span3(class="form-control", id="username", type="text", name="username", placeholder="Enter your username", required, autofocus)
+      label(for="inputPassword", class="sr-only") Password
+      input.span3(class="form-control", id="password", type="password", name="password", required)
+      br
+      input.btn(class="btn btn-lg btn-primary btn-block", type="submit", value="Log In")
+      br
+      button(class="btn btn-lg btn-primary btn-block", id='signup-button') Sign Up
 
-  h2 Questions
-    each question in questions
-        p #{question.content}
-        each answer in question.Answers
-          input(
-            type='radio'
-            name=answer.content
-            value='#{answer.id}'
-            id="q1a"
-          )
-          |  #{answer.content}
+    form(class="signup-form", method="post", action="/users/create")
+      h2(class="form-signin-heading") Let's sign up
+      label(for="inputEmail", class="sr-only") Username
+      input.span3(class="form-control", id="username", type="text", name="username", placeholder="Enter your username", required, autofocus)
+      label(for="inputPassword", class="sr-only") Password
+      input.span3(class="form-control", id="password", type="password", name="password", placeholder="Password", required)
+      label(for="inputCofirmedPassword", class="sr-only") Password
+      input.span3(class="form-control", id="confirmedPassword", type="password", name="comfirmedPassword", placeholder="Confirm password", required)
+      br
+      input.btn(class="btn btn-lg btn-primary btn-block", type="submit", value="Sign Up")
+      br
+      button(class="btn btn-lg btn-primary btn-block", id='signin-button') I have an account already
