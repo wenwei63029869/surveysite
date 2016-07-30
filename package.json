@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "body-parser": "~1.15.1",
-    "bootstrap": "^3.3.7",
     "client-sessions": "^0.7.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
@@ -16,6 +15,7 @@
     "morgan": "~1.7.0",
     "mysql": "^2.11.1",
     "nodemon": "^1.10.0",
+    "request-ip": "^1.2.2",
     "sequelize": "^2.0.0-rc1",
     "sequelize-cli": "^2.4.0",
     "serve-favicon": "~2.3.0"
