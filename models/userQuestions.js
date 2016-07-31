@@ -1,10 +1,11 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var UserQuestions = sequelize.define('UserQuestions', {
+    status: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
-        UserQuestions.belongsTo(models.Answer, {foreignKey: 'AnswerId'})
+        // associations can be defined here
       }
     }
   });

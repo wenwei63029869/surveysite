@@ -3,19 +3,25 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-  res.render('dashboard')
+  models.Question.findAll({
+    include: [models.Answer]
+  })
+  .then(function(questions) {
+    res.render('dashboard', {
+      questions: questions
+    });
+  });
 });
 
+// Make a route to delete a question
+
 router.post('/login', function(req, res) {
-  console.log("body: ", req.body.email)
   models.Admin.findOne({ where: {email: req.body.email }})
   .then(function(admin) {
-    console.log(admin)
     if (!admin) {
       res.render('error', { error: 'Invalid email or password.' });
     } else {
       if (req.body.password === admin.password) {
-        console.log("found admin")
         res.redirect('/admins');
       } else {
         res.render('error', { error: 'Invalid email or password.' });
@@ -25,12 +31,10 @@ router.post('/login', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
-  console.log("body: ", req.body)
   models.Admin.create({
     email: req.body.email,
     password: req.body.password
   }).then(function() {
-    console.log("New Admin is created")
     res.redirect('/admins');
   });
 });

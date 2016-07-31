@@ -2,6 +2,9 @@ extends layout
 
 block content
 
+    if error
+      h1= error
+
     form(id="question-form", method="post", action="/questions/create")
       h2(class="form-signin-heading") Add a new question
       input.span3(class="form-control", type="text", name="question", placeholder="What do you want to ask?", required)

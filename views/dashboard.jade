@@ -3,3 +3,20 @@ extends layout
 block content
 
     h1 Dashboard
+    a(class="btn btn-lg btn-primary", id='addQuestion', href="/questions/new") Add a question
+    br
+    br
+    h2 Questions
+    ul
+      each question in questions
+        li
+          = question.content
+          ul
+            each answer in question.Answers
+              li
+                = answer.content + ", number: " + (!answer.counter ? 0 : answer.counter)
+          br
+          a(class="btn btn-sm btn-primary", id='deleteQuestion', href="/questions/#{question.id}/destroy") Delete this question
+
+
+

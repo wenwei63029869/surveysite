@@ -1,11 +1,12 @@
 {
-  "name": "survey",
+  "name": "surveysite",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bluebird": "^3.4.1",
     "body-parser": "~1.15.1",
     "client-sessions": "^0.7.0",
     "cookie-parser": "~1.4.3",
@@ -19,5 +20,18 @@
     "sequelize": "^2.0.0-rc1",
     "sequelize-cli": "^2.4.0",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenwei63029869/surveysite.git"
+  },
+  "author": "Wei Wen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wenwei63029869/surveysite/issues"
+  },
+  "homepage": "https://github.com/wenwei63029869/surveysite#readme",
+  "description": ""
 }

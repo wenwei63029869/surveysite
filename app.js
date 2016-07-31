@@ -65,6 +65,4 @@ if (app.get('env') === 'development') {
   });
 }
 
-console.log(models.userQuestions)
-
 module.exports = app;
