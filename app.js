@@ -8,7 +8,8 @@ var session = require('client-sessions');
 var requestIp = require('request-ip');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var admins = require('./routes/admins');
+var questions = require('./routes/questions');
 var models = require('./models')
 
 var app = express();
@@ -40,7 +41,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/admins', users);
+app.use('/admins', admins);
+app.use('/questions', questions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -63,6 +65,6 @@ if (app.get('env') === 'development') {
   });
 }
 
-// console.log(models.userQuestion.instanceof)
+console.log(models.userQuestions)
 
 module.exports = app;

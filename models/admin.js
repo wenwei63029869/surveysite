@@ -1,15 +1,8 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
-    ip: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        User.belongsToMany(models.Question, {
-          through:models.userQuestions
-        })
-      }
-    }
+  var Admin = sequelize.define('Admin', {
+    email: DataTypes.STRING,
+    password: DataTypes.STRING
   });
-  return User;
+  return Admin;
 };

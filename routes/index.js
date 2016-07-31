@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
   console.log(req.ip)
-  res.send(req.ip)
+  res.render('index')
   // models.User.findOne({ where: {ip: req.ip }})
   // .then(function(user){
   //   if (!user)
@@ -20,8 +20,8 @@ router.get('/', function(req, res) {
   // });
 });
 
-router.post('/login', function(req, res) {
-
-});
+router.get('/login', function(req,res) {
+  res.render('login')
+})
 
 module.exports = router;

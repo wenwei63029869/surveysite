@@ -1,12 +1,12 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var userQuestions = sequelize.define('userQuestions', {
+  var UserQuestions = sequelize.define('UserQuestions', {
   }, {
     classMethods: {
       associate: function(models) {
-        userQuestions.belongsTo(models.Answer)
+        UserQuestions.belongsTo(models.Answer, {foreignKey: 'AnswerId'})
       }
     }
   });
-  return userQuestions;
+  return UserQuestions;
 };
