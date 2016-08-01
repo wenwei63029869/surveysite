@@ -4,7 +4,7 @@ $("document").ready(function(){
   $(".question").click(function(){
     var questionId = $(this).data("questionid")
     if ($("#answerChart"+questionId).css('display') !== "none") {
-      $("#answerChart"+questionId).hide();
+      $("#answerChart"+questionId).hide(1000);
     } else {
       var chartData = buildChartData($(this));
       createChart(questionId, chartData);
@@ -13,22 +13,21 @@ $("document").ready(function(){
 
   var buildChartData = function(div) {
     var elements = div.children('.answer')
-    var answers = []
+    var answers = [];
     var labels = [];
     var data = [];
     var backgroundColor = [];
     var count = 0;
     var chartData = {};
-    $(".answerChart").hide();
+    $(".answerChart").hide(1000);
     for (i = 0; i < elements.length; i++) {
         labels.push($(elements[i]).data('content'));
         data.push($(elements[i]).data('counter'));
         backgroundColor.push(colors[i]);
-    }
+    };
     chartData.labels = labels;
     chartData.datasets = [{data: data, backgroundColor: backgroundColor, hoverBackgroundColor: backgroundColor}];
-    console.log(chartData)
-    return chartData
+    return chartData;
 
   }
 
@@ -51,7 +50,7 @@ $("document").ready(function(){
           }
       }
     });
-    ctx.show();
+    ctx.show(2000);
   }
 
 });
