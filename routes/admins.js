@@ -23,13 +23,13 @@ router.post('/login', function(req, res) {
   models.Admin.findOne({ where: {email: req.body.email }})
   .then(function(admin) {
     if (!admin) {
-      res.render('home/error', { error: 'Invalid email or password.' });
+      res.render('home/login', { error: 'Invalid email or password.' });
     } else {
       if (req.body.password === admin.password) {
         req.session.admin = admin;
         res.redirect('/admins');
       } else {
-        res.render('home/error', { error: 'Invalid email or password.' });
+        res.render('home/login', { error: 'Invalid email or password.' });
       }
     }
   });

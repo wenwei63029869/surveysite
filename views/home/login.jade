@@ -1,7 +1,8 @@
 extends ../layout
 
 block content
-
+    if error
+      p #[font(color="red") #{error}]
     form(class="signup-form", method="post", action="/admins/create")
       h2(class="form-signin-heading") Let's sign up
       input.span3(class="form-control", type="text", name="email", placeholder="Enter your email", required)
