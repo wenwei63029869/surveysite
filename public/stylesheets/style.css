@@ -13,10 +13,12 @@ a {
 }
 
 img {
-  margin-left: 28em;
+  width: 60%;
+  margin-left: 20%;
 }
 
 #caption {
-  margin-left: 20.5em;
+  width: 100%;
+  text-align: center;
 }
 
