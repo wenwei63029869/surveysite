@@ -4,6 +4,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
+  if (req.session && (req.session.admin || req.session.submitted)) {
+    res.render('home/index');
+  };
   findUser(req)
   .then(function(user){
     if (!user) {
@@ -28,6 +31,7 @@ router.get('/', function(req, res) {
       });
     } else {
       var questions = user.Questions
+      console.log(questions)
       if (questions.length === 0) {
         res.render('home/index')
       } else {

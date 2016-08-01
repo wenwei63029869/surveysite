@@ -1,8 +1,22 @@
 body {
-  padding: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("http://blog.hostbaby.com/wp-content/uploads/2013/07/scuffedstatic_dark1400x900.jpg");
+  background-size: cover;
 }
 
 a {
   color: #00B7FF;
 }
+
+img {
+  margin-left: 28em;
+}
+
+#caption {
+  margin-left: 20.5em;
+}
+
