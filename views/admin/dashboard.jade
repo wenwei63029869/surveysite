@@ -11,7 +11,10 @@ block content
       button(class="btn btn-md btn-secondary") Add a question
     br
     br
-    font(color="white", size="4px", face="Impact, Charcoal, sans-serif") Click on a question to review results
+    if (questions[0])
+      font(color="white", size="4px", face="Impact, Charcoal, sans-serif") Click on a question to review results
+    else
+      font(color="white", size="4px", face="Impact, Charcoal, sans-serif") Click Add Question button to create a question now
     br
     br
     each question in questions
