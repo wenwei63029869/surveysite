@@ -4,20 +4,22 @@ block content
     if error
       p #[font(color="red") #{error}]
     form(class="signup-form", method="post", action="/admins/create")
-      h2(class="form-signin-heading") Let's sign up
+      div #[font(color="white", size="6px", face="Impact, Charcoal, sans-serif") Sign up to be an admin!]
+      br
       input.span3(class="form-control", type="text", name="email", placeholder="Enter your email", required)
       input.span3(class="form-control", type="password", name="password", placeholder="Password", required)
       input.span3(class="form-control", type="password", name="comfirmedPassword", placeholder="Confirm password", required)
       br
-      input.btn(class="btn btn-lg btn-primary btn-block", type="submit", value="Sign Up")
+      input.btn(class="btn-lg btn btn-outline-secondary btn-block", type="submit", value="Sign Up")
       br
-      button(class="btn btn-lg btn-primary btn-block", id='signin-button') I have an account already
+      button(class="btn-lg btn btn-outline-secondary btn-block", id='signin-button') I have an account already
 
     form(class="signin-form", method="post", action="/admins/login")
-      h2(class="form-signin-heading") Please sign in
+      div #[font(color="white", face="Impact, Charcoal, sans-serif", size="6px") Please sign in]
+      br
       input.span3(class="form-control", type="text", name="email", placeholder="Enter your email", required)
       input.span3(class="form-control", type="password", name="password", placeholder="Password", required)
       br
-      input.btn(class="btn btn-lg btn-primary btn-block", type="submit", value="Log In")
+      input.btn(class="btn-lg btn btn-outline-secondary btn-block", type="submit", value="Log In")
       br
-      button(class="btn btn-lg btn-primary btn-block", id='signup-button') Sign Up
+      button(class="btn-lg btn btn-outline-secondary btn-block", id='signup-button') Sign Up

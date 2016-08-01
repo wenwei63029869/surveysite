@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
       include: [models.Answer]
     })
     .then(function(questions) {
-      console.log("admin: ", res.locals.admin)
       res.render('admin/dashboard', {
         questions: questions,
         admin: res.locals.admin

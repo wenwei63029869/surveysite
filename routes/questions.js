@@ -28,7 +28,8 @@ router.post('/:question_id/submitted', function(req, res) {
   findUserQuestion(req.body, req.params)
   .then(function(){
     console.log("finish updating userQuestion status")
-    res.render('home/index')
+    req.session.submitted = "true";
+    res.redirect('/')
   })
   .catch(function(err) {
     console.error(err);

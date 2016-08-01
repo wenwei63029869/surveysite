@@ -2,24 +2,28 @@ extends ../layout
 
 block content
 
-    h1 Dashboard
+    div #[font(color="white", size="7", face="Impact, Charcoal, sans-serif") Dashboard]
+    br
     a(class="btn btn-lg btn-warning", id='logout', href="/admins/logout") Logout
     br
     br
-    a(class="btn btn-lg btn-primary", id='addQuestion', href="/questions/new") Add a question
+    form(action="/questions/new", method="get")
+      button(class="btn btn-md btn-secondary") Add a question
     br
     br
-    h2 Questions
-    ul
-      each question in questions
-        li
-          = question.content
-          ul
-            each answer in question.Answers
-              li
-                = answer.content + ", number: " + (!answer.counter ? 0 : answer.counter)
-          br
-          a(class="btn btn-sm btn-primary", id='deleteQuestion', href="/questions/#{question.id}/destroy") Delete this question
+    each question in questions
+      div(class="question", data-questionid=question.id)
+        font(color="white", size="6px", face="Impact, Charcoal, sans-serif") #{question.content}
+        each answer in question.Answers
+          div(class="answer", data-content=answer.content, data-counter=!answer.counter ? 0 : answer.counter, style="display: none")
+        br
+        br
+        canvas(class="answerChart", id="answerChart"+ question.id, width="400px", height="400px", style="display: none")
+        br
+        a(class="btn btn-sm btn-danger", id='deleteQuestion', href="/questions/#{question.id}/destroy") Delete this question
+      br
+      br
+
 
 
 

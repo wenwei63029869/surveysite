@@ -1,14 +1,22 @@
 extends ../layout
 
 block content
+      if admin
+        form(action="/admins", method="get")
+        button(class="btn btn-md btn-secondary pull-right") Dashboard
+
       if question
         form(class="form-group", method="post", action='/questions/#{question.id}/submitted')
-          h1 #{question.content}
+          h1 #[font(color="white", face="Impact, Charcoal, sans-serif") #{question.content}]
           select(name="answer" class="form-control")
             each answer in answers
               option(value="#{answer.id}") #{answer.content}
           input(type="hidden", value="#{userId}", name="userId")
           br
-          button(type="submit", class="btn btn-primary") Submit
+          button(type="submit", class="btn btn-outline-secondary") Submit
 
-      a(class="btn btn-lg btn-primary btn-block", id='login', href="/login") Admin
+      br
+
+      div(id="RomboGif")
+        img(src="http://67.media.tumblr.com/913fb1bf49afdf046face0b863662445/tumblr_mugq9xgSX31s5hedko1_1280.gif",alt="HTML5 Icon", style="width:380px;height:200px;")
+        h3(id="caption") #[font(color="white") You can do it!!!]
