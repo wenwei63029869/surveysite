@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+
+    if error
+      h1= error
+
+    form(id="question-form", method="post", action="/questions/create")
+      h2(class="form-signin-heading") Add a new question
+      input.span3(class="form-control", type="text", name="question", placeholder="What do you want to ask?", required)
+      div(id="answer-fields")
+        input.span3(class="form-control", type="text", name="answers", placeholder="Option", required)
+        input.span3(class="form-control", type="text", name="answers", placeholder="Option", required)
+      br
+      button(class="btn btn-md btn-primary btn-block", id="add-answer-button") Add Answer
+      br
+      input.btn(class="btn btn-lg btn-primary btn-block", type="submit", value="Create This Question")

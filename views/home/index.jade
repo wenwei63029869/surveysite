@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+      if question
+        form(class="form-group", method="post", action='/questions/#{question.id}/submitted')
+          h1 #{question.content}
+          select(name="answer" class="form-control")
+            each answer in answers
+              option(value="#{answer.id}") #{answer.content}
+          input(type="hidden", value="#{userId}", name="userId")
+          br
+          button(type="submit", class="btn btn-primary") Submit
+
+      a(class="btn btn-lg btn-primary btn-block", id='login', href="/login") I am admin

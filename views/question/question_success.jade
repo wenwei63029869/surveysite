@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+
+  form(class="form-group")
+    h1 #{question.content}
+    select(name="answer" class="form-control")
+      each answer in answers
+        option(value="#{answer.id}") #{answer.content}
+    br
+
+  a(class="btn btn-info", href="/admins") Dashboard

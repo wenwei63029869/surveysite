@@ -4,30 +4,63 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  models.Question.findAll({
-    include: [ models.Answer ]
-  }).then(function(questions) {
-    res.render('index', {
-      title: 'Express',
-      questions: questions
-    });
+  findUser(req)
+  .then(function(user){
+    if (!user) {
+      models.User.create({
+        ip: req.ip
+      })
+      .then(function(user) {
+        models.Question.findAll({
+          include: [models.Answer]
+        })
+        .then(function(questions) {
+          if (questions.length === 0) {
+            res.render('home/index');
+          }
+          var question = pickQuestion(questions)
+          user.addQuestions(questions);
+          res.render('home/index', {
+            question: question,
+            answers: question.Answers
+          });
+        });
+      });
+    } else {
+      var questions = user.Questions
+      if (questions.length === 0) {
+        res.render('home/index')
+      } else {
+        var question = pickQuestion(questions)
+        question.getAnswers()
+        .then(function(answers) {
+          res.render('home/index', {
+            question: question,
+            answers: answers,
+            userId: user.id
+          });
+        });
+      };
+    };
   });
 });
 
-router.post('/login', function(req, res) {
-  models.User.findOne({ email: req.body.username }, function(err, user) {
-    if (!user) {
-      res.render('/', { error: 'Invalid email or password.' });
-    } else {
-      if (req.body.password === user.password) {
-        console.log("found user")
-        res.send("successfully login")
-        // res.redirect('/dashboard');
-      } else {
-        res.render('/', { error: 'Invalid email or password.' });
-      }
-    }
-  });
-});
+var findUser = function(opt) {
+  return models.User.findOne({
+    where: { ip: opt.ip },
+    include: [{
+      model: models.Question,
+      through: { where:{ status: null } }
+    }]
+  })
+}
+
+var pickQuestion = function(questions) {
+  return questions[Math.floor(Math.random()*questions.length)]
+}
+
+router.get('/login', function(req,res) {
+  res.render('home/login')
+})
 
 module.exports = router;
