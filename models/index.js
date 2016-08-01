@@ -8,10 +8,23 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
+var checkConnection = function(sequelize) {
+  sequelize
+  .authenticate()
+  .then(function(err) {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(function (err) {
+    console.log('Unable to connect to the database:', err);
+  });
+}
+
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  checkConnection(sequelize);
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  checkConnection(sequelize);
 }
 
 fs
