@@ -11,6 +11,9 @@ block content
       button(class="btn btn-md btn-secondary") Add a question
     br
     br
+    font(color="white", size="4px", face="Impact, Charcoal, sans-serif") Click on a question to review results
+    br
+    br
     each question in questions
       div(class="question", data-questionid=question.id)
         font(color="white", size="6px", face="Impact, Charcoal, sans-serif") #{question.content}
