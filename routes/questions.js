@@ -4,14 +4,15 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/success', function(req, res) {
+router.get('/:question_id/success', function(req, res) {
   models.Question.findOne({
-    where: {id: parseInt(req.query.question_id)},
+    where: {id: parseInt(req.params.question_id)},
     include: [models.Answer]
   })
   .then(function(question) {
-    question.getAnswers().then(function(answers){
-      res.render('question_success', {
+    question.getAnswers()
+    .then(function(answers){
+      res.render('question/question_success', {
         question: question,
         answers: answers
       });
@@ -20,40 +21,51 @@ router.get('/success', function(req, res) {
 })
 
 router.get('/new', function(req, res) {
-  res.render('new_question');
+  res.render('question/new_question');
 });
 
 router.post('/:question_id/submitted', function(req, res) {
-  console.log("userId: ", req.body.userId);
-  console.log("question id: ", req.params.question_id);
-  models.UserQuestions.findOne({
+  findUserQuestion(req.body, req.params)
+  .then(function(){
+    console.log("finish updating userQuestion status")
+    res.render('home/index')
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500);
+  });
+});
+
+var findUserQuestion = function(opt, params) {
+  return models.UserQuestions.findOne({
     where: {
-      UserId: req.body.userId,
-      QuestionId: req.params.question_id
+      UserId: opt.userId,
+      QuestionId: params.question_id
     }
   })
   .then(function(userQuestion) {
     if (!userQuestion) {
-      res.send("Can't find userQuestion")
+      throw new Error("userQuestion fails to be found");
     };
-    models.Answer.findOne({
-      where: {id: req.body.answer}
+    return models.Answer.findOne({
+      where: {id: opt.answer}
     }).
     then(function(answer) {
-      answer.update({
+      return updateAnswer(userQuestion, answer)
+    });
+  });
+};
+
+var updateAnswer = function(userQuestion, answer) {
+  return answer.update({
         counter: answer.counter + 1
       })
       .then(function(){
-        userQuestion.update({
+        return userQuestion.update({
           status: "Answered"
-        })
-        .then(function(){
-          res.render('index')
         });
       });
-    });
-  });
-});
+};
 
 router.get('/:question_id/destroy', function(req, res) {
   models.Question.destroy({
@@ -66,47 +78,53 @@ router.get('/:question_id/destroy', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
-  models.Question.create({
-    content: req.body.question
+  createQuestion(req.body).then(function(question) {
+    res.redirect("/questions/" + question.id + "/success");
+  }, function(err) {
+    res.render('questions/new', {
+      error: err.message
+    });
+  }).catch(function(err) {
+    console.error(err);
+    res.status(500);
+  });
+});
+
+function createQuestion(opts) {
+  return models.Question.create({
+    content: opts.question
   })
   .then(function(question) {
     if (!question) {
-      res.render('questions/new', {
-          error: "Question \"#{req.body.question}\" fails to be created"
-        });
-    } else {
-      // Update the new question to each user
+      throw new Error("Question \"#{opts.question}\" fails to be created");
+    }
+    // Update the new question to each user
+    return Promise.all([
       models.User.findAll()
       .then(function(users) {
         users.forEach(function(user) {
           user.addQuestion(question)
-        });
-      });
-      Promise.map(req.body.answers, function(answer){
-        return createAndAddToQuestion(question, answer, res)
+        })
+      }),
+      Promise.map(opts.answers, function(answer){
+        return createAndAddToQuestion(question, answer)
       })
-      .done(function(){
-        console.log('finished')
-        res.redirect("/questions/success/?question_id=" + question.id);
-      });
-    };
-  })
-})
+    ]).return(question);
+  });
+}
 
-var createAndAddToQuestion = function(question, answer, res) {
-  models.Answer.create({
+function createAndAddToQuestion(question, answer) {
+  return models.Answer.create({
     content: answer
   })
   .then(function(ans) {
-    if (ans) {
-      return question.addAnswer(ans).then(function() {
-        console.log('done')
-      })
-    } else {
-      res.render('questions/new', {
-        error: "Answer \"#{answer}\" fails to be created"
-      });
-    };
+    if (!ans) {
+      throw new Error("Answer \"#{answer}\" fails to be created");
+    }
+    return question.addAnswer(ans);
+  })
+  .then(function(){
+    console.log("done adding a answer to the question")
   });
 }
 

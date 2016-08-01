@@ -32,7 +32,27 @@ app.use(session({
   secret: 'random_string_goes_here',
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
 }));
+
+app.use(function(req, res, next) {
+  if (req.session && req.session.admin) {
+    models.Admin.findOne({ email: req.session.admin.email })
+    .then(function(admin) {
+      if (admin) {
+        req.admin = admin;
+        delete req.admin.password;
+        req.session.admin = admin;
+        res.locals.admin = admin;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
 // get client ip address
 app.use(function(req, res, next) {
@@ -58,7 +78,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('home/error', {
       message: err.message,
       error: err
     });

@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block content
 
@@ -8,6 +8,5 @@ block content
       each answer in answers
         option(value="#{answer.id}") #{answer.content}
     br
-    button(type="submit", class="btn btn-primary") Submit
 
   a(class="btn btn-info", href="/admins") Dashboard
