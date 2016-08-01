@@ -4,5 +4,5 @@ $("document").ready(function(){
      .attr("class", "form-control")
      .attr("name", "answers")
      .appendTo("#answer-fields");
-  })
+  });
 });

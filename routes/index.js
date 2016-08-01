@@ -20,8 +20,8 @@ router.get('/', function(req, res) {
         .then(function(questions) {
           if (questions.length === 0) {
             res.render('home/index');
-          }
-          var question = pickQuestion(questions)
+          };
+          var question = pickQuestion(questions);
           user.addQuestions(questions);
           res.render('home/index', {
             question: question,
@@ -31,9 +31,8 @@ router.get('/', function(req, res) {
       });
     } else {
       var questions = user.Questions
-      console.log(questions)
       if (questions.length === 0) {
-        res.render('home/index')
+        res.render('home/index');
       } else {
         var question = pickQuestion(questions)
         question.getAnswers()
@@ -56,15 +55,15 @@ var findUser = function(opt) {
       model: models.Question,
       through: { where:{ status: null } }
     }]
-  })
-}
+  });
+};
 
 var pickQuestion = function(questions) {
-  return questions[Math.floor(Math.random()*questions.length)]
-}
+  return questions[Math.floor(Math.random()*questions.length)];
+};
 
 router.get('/login', function(req,res) {
-  res.render('home/login')
-})
+  res.render('home/login');
+});
 
 module.exports = router;

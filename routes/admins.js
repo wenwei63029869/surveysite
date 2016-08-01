@@ -29,8 +29,8 @@ router.post('/login', function(req, res) {
         res.redirect('/admins');
       } else {
         res.render('home/login', { error: 'Invalid email or password.' });
-      }
-    }
+      };
+    };
   });
 });
 

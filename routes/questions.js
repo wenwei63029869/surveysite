@@ -27,9 +27,9 @@ router.get('/new', function(req, res) {
 router.post('/:question_id/submitted', function(req, res) {
   findUserQuestion(req.body, req.params)
   .then(function(){
-    console.log("finish updating userQuestion status")
+    console.log("finish updating userQuestion status");
     req.session.submitted = "true";
-    res.redirect('/')
+    res.redirect('/');
   })
   .catch(function(err) {
     console.error(err);
@@ -105,7 +105,7 @@ function createQuestion(opts) {
       .then(function(users) {
         users.forEach(function(user) {
           user.addQuestion(question)
-        })
+        });
       }),
       Promise.map(opts.answers, function(answer){
         return createAndAddToQuestion(question, answer)
@@ -125,8 +125,8 @@ function createAndAddToQuestion(question, answer) {
     return question.addAnswer(ans);
   })
   .then(function(){
-    console.log("done adding a answer to the question")
+    console.log("done adding a answer to the question");
   });
 }
-
+;
 module.exports = router;
