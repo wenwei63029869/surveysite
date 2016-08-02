@@ -20,10 +20,31 @@ var checkConnection = function(sequelize) {
 };
 
 if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  var sequelize = new Sequelize(
+    process.env[config.use_env_variable],
+    {
+      pool: {
+      max: 5,
+      min: 0,
+      maxIdleTime: 120000
+      }
+    }
+  );
   checkConnection(sequelize);
 } else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  var sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    {
+      host: config.host,
+      dialect: config.dialect,
+      pool: {
+      max: 5,
+      min: 0,
+      maxIdleTime: 120000
+      }
+  });
   checkConnection(sequelize);
 };
 
