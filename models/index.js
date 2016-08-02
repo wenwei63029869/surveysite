@@ -24,7 +24,7 @@ if (config.use_env_variable) {
     process.env[config.use_env_variable],
     {
       pool: {
-      max: 5,
+      max: 1,
       min: 0,
       maxIdleTime: 120000
       }
@@ -40,7 +40,7 @@ if (config.use_env_variable) {
       host: config.host,
       dialect: config.dialect,
       pool: {
-      max: 5,
+      max: 1,
       min: 0,
       maxIdleTime: 120000
       }
