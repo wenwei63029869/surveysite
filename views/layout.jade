@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
@@ -13,11 +14,8 @@ html
     script(src='/javascripts/display-result.js')
 
   body
-    div #[font(color="white", size="100px", face="Impact, Charcoal, sans-serif") SurveySite]
+    a(href="/", style="text-decoration: none !important;") #[font(color="white", size="100px", face="Impact, Charcoal, sans-serif") SurveySite]
     br
     br
-    if !admin
-      form(action="/login", method="get")
-        button(class="btn btn-md btn-secondary pull-right") Admin
 
     block content

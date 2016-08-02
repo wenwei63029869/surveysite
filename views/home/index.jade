@@ -4,6 +4,9 @@ block content
       if admin
         form(action="/admins", method="get")
         button(class="btn btn-md btn-secondary pull-right") Dashboard
+      else
+        form(action="/login", method="get")
+          button(class="btn btn-md btn-secondary pull-right") Admin
 
       if question
         form(class="form-group", method="post", action='/questions/#{question.id}/submitted')
