@@ -30,6 +30,7 @@ router.get('/', function(req, res) {
         });
       });
     } else {
+      console.log(user)
       var questions = user.Questions
       if (questions.length === 0) {
         res.render('home/index');
