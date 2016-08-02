@@ -5,16 +5,18 @@ block content
         a(class="btn btn-md btn-info pull-right", href="/admins") Dashbard
       else
         a(class="btn btn-md btn-info pull-right", href="/login") Login/Signup
+      br
+      br
 
       if question
         form(class="form-group", method="post", action='/questions/#{question.id}/submitted')
-          h1 #[font(color="white", face="Impact, Charcoal, sans-serif") #{question.content}]
+          h1 #[font(color="white", face="Impact, Charcoal, sans-serif", size="4") #{question.content}]
           select(name="answer" class="form-control")
             each answer in answers
               option(value="#{answer.id}") #{answer.content}
           input(type="hidden", value="#{userId}", name="userId")
           br
-          button(type="submit", class="btn btn-outline-info") Submit
+          button(type="submit", class="btn-info") Submit
 
       br
       br
