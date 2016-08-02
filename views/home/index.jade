@@ -3,7 +3,7 @@ extends ../layout
 block content
       if admin
         form(action="/admins", method="get")
-        button(class="btn btn-md btn-secondary pull-right") Dashboard
+          button(class="btn btn-md btn-secondary pull-right") Dashboard
       else
         form(action="/login", method="get")
           button(class="btn btn-md btn-secondary pull-right") Admin
