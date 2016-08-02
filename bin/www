@@ -26,7 +26,6 @@ var server = http.createServer(app);
 
  * After all the tables are genereted, listen on provided port, on all network interfaces.
  */
-console.log("why!!!!")
 models.sequelize.sync()
 .then(function () {
   console.log("Done generated tables")
