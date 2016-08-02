@@ -28,14 +28,11 @@ router.get('/new', function(req, res) {
 });
 
 router.post('/:question_id/submitted', function(req, res) {
-  if (!res.locals.admin) {
-    res.redirect('/login');
-  };
   findUserQuestion(req.body, req.params)
   .then(function(){
     console.log("finish updating userQuestion status");
     req.session.submitted = "true";
-    res.redirect('/');
+    res.redirect('/');g
   })
   .catch(function(err) {
     console.error(err);
