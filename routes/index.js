@@ -25,7 +25,8 @@ router.get('/', function(req, res) {
           user.addQuestions(questions);
           res.render('home/index', {
             question: question,
-            answers: question.Answers
+            answers: question.Answers,
+            userId: user.id
           });
         });
       });

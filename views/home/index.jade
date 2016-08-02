@@ -7,7 +7,7 @@ block content
         a(class="btn btn-md btn-info pull-right", href="/login") Login/Signup
       br
       br
-
+      h1 userId
       if question
         form(class="form-group", method="post", action='/questions/#{question.id}/submitted')
           h1 #[font(color="white", face="Impact, Charcoal, sans-serif", size="4") #{question.content}]
