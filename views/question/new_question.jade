@@ -5,8 +5,7 @@ block content
     if error
       h1= error
 
-    form(action="/admins", method="get")
-      button(class="btn btn-md btn-info pull-right") Dashboard
+    a(class="btn btn-md btn-info pull-right", href="/admins") Dashboard
     br
     form(id="question-form", method="post", action="/questions/create")
       font(color="white", size="6px", face="Impact, Charcoal, sans-serif") Add a new question
