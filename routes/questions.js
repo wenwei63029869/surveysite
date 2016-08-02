@@ -21,10 +21,16 @@ router.get('/:question_id/success', function(req, res) {
 })
 
 router.get('/new', function(req, res) {
+  if (!res.locals.admin) {
+    res.redirect('/login');
+  };
   res.render('question/new_question');
 });
 
 router.post('/:question_id/submitted', function(req, res) {
+  if (!res.locals.admin) {
+    res.redirect('/login');
+  };
   findUserQuestion(req.body, req.params)
   .then(function(){
     console.log("finish updating userQuestion status");
@@ -69,6 +75,9 @@ var updateAnswer = function(userQuestion, answer) {
 };
 
 router.get('/:question_id/destroy', function(req, res) {
+  if (!res.locals.admin) {
+    res.redirect('/login');
+  };
   models.Question.destroy({
     where: {
       id: req.params.question_id
@@ -79,6 +88,9 @@ router.get('/:question_id/destroy', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
+  if (!res.locals.admin) {
+    res.redirect('/login');
+  };
   createQuestion(req.body).then(function(question) {
     res.redirect("/questions/" + question.id + "/success");
   }, function(err) {

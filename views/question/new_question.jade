@@ -6,7 +6,7 @@ block content
       h1= error
 
     form(action="/admins", method="get")
-      button(class="btn btn-lg btn-secondary pull-right") Dashboard
+      button(class="btn btn-md btn-info pull-right") Dashboard
     br
     form(id="question-form", method="post", action="/questions/create")
       font(color="white", size="6px", face="Impact, Charcoal, sans-serif") Add a new question
@@ -17,7 +17,7 @@ block content
         input.span3(class="form-control", type="text", name="answers", placeholder="Option", required)
         input.span3(class="form-control", type="text", name="answers", placeholder="Option", required)
       br
-      button(type="#", class="btn btn-lg btn-secondary", id="add-answer-button") Add Answer
+      button(type="#", class="btn btn-lg btn-info", id="add-answer-button") Add Answer
       br
       br
-      input.btn(class="btn btn-lg btn-secondary btn-block", type="submit", value="Create This Question")
+      input.btn(class="btn btn-lg btn-info btn-block", type="submit", value="Create This Question")

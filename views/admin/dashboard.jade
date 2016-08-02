@@ -7,8 +7,7 @@ block content
     a(class="btn btn-md btn-warning", id='logout', href="/admins/logout") Logout
     br
     br
-    form(action="/questions/new", method="get")
-      button(class="btn btn-md btn-secondary", , href="/questions/new") Add a question
+    a(class="btn btn-md btn-info", href="/questions/new") Add a question
     br
     br
     if (questions[0])

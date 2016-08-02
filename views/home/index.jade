@@ -2,11 +2,9 @@ extends ../layout
 
 block content
       if admin
-        form(action="/admins", method="get")
-          button(class="btn btn-md btn-secondary pull-right") Dashboard
+        a(class="btn btn-md btn-info pull-right", href="/admins") Dashbard
       else
-        form(action="/login", method="get")
-          button(class="btn btn-md btn-secondary pull-right") Admin
+        a(class="btn btn-md btn-info pull-right", href="/login") Login/Signup
 
       if question
         form(class="form-group", method="post", action='/questions/#{question.id}/submitted')
@@ -16,7 +14,7 @@ block content
               option(value="#{answer.id}") #{answer.content}
           input(type="hidden", value="#{userId}", name="userId")
           br
-          button(type="submit", class="btn btn-outline-secondary") Submit
+          button(type="submit", class="btn btn-outline-info") Submit
 
       br
       br
