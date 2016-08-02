@@ -22,19 +22,17 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+/**
+
+ * After all the tables are genereted, listen on provided port, on all network interfaces.
+ */
+
 models.sequelize.sync().then(function () {
+  console.log("Done generated tables")
   server.listen(port);
   server.on('error', onError);
   server.on('listening', onListening);
 });
-
-/**
- * Listen on provided port, on all network interfaces.
- */
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.
